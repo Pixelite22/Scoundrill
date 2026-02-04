@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="monsterCard" load_steps=2 format=3 uid="uid://bofjt6bafovcn"]
+
+[ext_resource type="Script" uid="uid://boib2lytvlgaf" path="res://Scenes and Code/Custom Resources/monster_cards.gd" id="1_otuyd"]
+
+[resource]
+script = ExtResource("1_otuyd")
+effects = 0
+value = 0
+metadata/_custom_type_script = "uid://boib2lytvlgaf"

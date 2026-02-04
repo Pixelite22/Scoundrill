@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="weaponCard" load_steps=2 format=3 uid="uid://b1025p3iqp3mm"]
+
+[ext_resource type="Script" uid="uid://dr6jb201x203x" path="res://Scenes and Code/Custom Resources/Weapon_Cards.gd" id="1_3msi4"]
+
+[resource]
+script = ExtResource("1_3msi4")
+effects = 0
+value = 0
+metadata/_custom_type_script = "uid://dr6jb201x203x"

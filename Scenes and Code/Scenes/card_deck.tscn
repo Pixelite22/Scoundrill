@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://x8nteqm08pbp"]
+
+[ext_resource type="Texture2D" uid="uid://d3gubhnikk4od" path="res://Assets/kenney_playing-cards-pack/PNG/Cards (large)/card_back.png" id="1_6bscr"]
+[ext_resource type="Script" uid="uid://c6pwoxvfnuxs7" path="res://Scenes and Code/Scenes/card_deck.gd" id="1_s6nyq"]
+[ext_resource type="Resource" uid="uid://cgasoeag40okv" path="res://Resources/Cards/Decks/Main Deck.tres" id="2_43ct6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h75g5"]
+size = Vector2(40, 58)
+
+[node name="Deck" type="Node2D"]
+script = ExtResource("1_s6nyq")
+deck_res = ExtResource("2_43ct6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6bscr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h75g5")

@@ -7,6 +7,9 @@ enum Effect {NONE, STRONG, WEAK, FIRE, ICE, POISON}
 @export var effects : Effect
 @export var value : int
 
+func value_assign():
+	value = randi_range(2, 14)
+
 func resolve(card : Card, player):
 	pass
 

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbkhjchnumeoh"]
+
+[ext_resource type="Texture2D" uid="uid://dywor8muoyp86" path="res://Assets/kenney_playing-cards-pack/PNG/Cards (large)/card_empty.png" id="1_7np2i"]
+[ext_resource type="Script" uid="uid://ciokig3b7qjmq" path="res://Scenes and Code/Code/playing_card.gd" id="2_7np2i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7np2i"]
+size = Vector2(40, 58)
+
+[node name="Playing Card" type="Sprite2D"]
+scale = Vector2(5, 5)
+texture = ExtResource("1_7np2i")
+script = ExtResource("2_7np2i")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7np2i")

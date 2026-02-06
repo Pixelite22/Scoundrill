@@ -8,10 +8,15 @@ enum Effect {NONE, STRONG, WEAK, FIRE, ICE, POISON}
 @export var value : int
 
 func value_assign():
-	value = randi_range(2, 14)
+	pass
 
 func resolve(card : Card, player):
-	pass
+	if card is monsterCard:
+		player.health -= card.value
+	if card is weaponCard:
+		pass
+	if card is healthCard:
+		player.health += card.value
 
 func apply_effect(card : Card):
 	pass

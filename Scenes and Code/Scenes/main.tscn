@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqid46a8fsr7p"]
+[gd_scene load_steps=8 format=3 uid="uid://cqid46a8fsr7p"]
 
 [ext_resource type="Script" uid="uid://cy3tkg0tu7tb" path="res://Scenes and Code/Code/main.gd" id="1_h5p5m"]
 [ext_resource type="PackedScene" uid="uid://cbkhjchnumeoh" path="res://Scenes and Code/Scenes/playing_card.tscn" id="2_1cyi1"]
 [ext_resource type="Script" uid="uid://b2fa1vhttkcxq" path="res://Scenes and Code/Custom Resources/health_cards.gd" id="3_b3peg"]
 [ext_resource type="PackedScene" uid="uid://x8nteqm08pbp" path="res://Scenes and Code/Scenes/card_deck.tscn" id="4_btu8o"]
+[ext_resource type="PackedScene" uid="uid://dq2edbrua2rxn" path="res://Scenes and Code/Scenes/player.tscn" id="5_1cyi1"]
 
 [sub_resource type="Resource" id="Resource_w3eow"]
 script = ExtResource("3_b3peg")
@@ -21,56 +22,22 @@ metadata/_custom_type_script = "uid://b2fa1vhttkcxq"
 script = ExtResource("1_h5p5m")
 
 [node name="Playing Card" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(107, 152)
+position = Vector2(145, 241)
 card_res = SubResource("Resource_w3eow")
 
 [node name="Playing Card2" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(187, 152)
+position = Vector2(393, 244)
 card_res = SubResource("Resource_btu8o")
 
 [node name="Playing Card3" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(284, 152)
+position = Vector2(679, 246)
 card_res = SubResource("Resource_w3eow")
 
 [node name="Playing Card4" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(363, 152)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card5" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(435, 152)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card6" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(523, 152)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card7" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(595, 152)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card8" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(667, 152)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card9" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(741, 151)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card10" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(826, 148)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card11" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(908, 147)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card12" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(980, 146)
-card_res = SubResource("Resource_w3eow")
-
-[node name="Playing Card13" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(1051, 146)
+position = Vector2(992, 234)
 card_res = SubResource("Resource_w3eow")
 
 [node name="Deck" parent="." instance=ExtResource("4_btu8o")]
-position = Vector2(407, 401)
+position = Vector2(976, 529)
+
+[node name="Player" parent="." instance=ExtResource("5_1cyi1")]

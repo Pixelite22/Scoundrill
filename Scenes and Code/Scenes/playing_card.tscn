@@ -6,10 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7np2i"]
 size = Vector2(40, 58)
 
-[node name="Playing Card" type="Sprite2D"]
+[node name="Playing Card" type="Area2D"]
 scale = Vector2(5, 5)
-texture = ExtResource("1_7np2i")
 script = ExtResource("2_7np2i")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7np2i")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_7np2i")

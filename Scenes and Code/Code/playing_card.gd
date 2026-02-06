@@ -1,6 +1,9 @@
-extends Sprite2D
+extends Area2D
+
+signal card_collected(attribute, value)
 
 @export var card_res : Card
+@onready var sprite: Sprite2D = $Sprite
 
 var card_types := ["res://Resources/Cards/Health Potions/health_potion.tres", "res://Resources/Cards/Monsters/monster.tres", "res://Resources/Cards/Weapons/weapon.tres"]
 
@@ -9,17 +12,25 @@ var value
 var suit
 var valuestr
 
+var suit_flg = false
+var value_flg = false
 
-func _ready() -> void:
+var player_node
+
+func _process(delta: float) -> void:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		card_res.resolve(card_res, player_node)
+		card_collected.emit(card_res, value)
+		print(player_node.health)
+
+
+func card_assign() -> void:
 	value_assign()
 	suit_assign()
 	
-	texture = load(card_sprite_path_prefix + suit + valuestr)
-
+	sprite.texture = load(card_sprite_path_prefix + suit + valuestr)
 
 func suit_assign():
-	card_res = load(card_types.pick_random())
-	
 	if value == 0:
 		suit = "empty"
 	else:
@@ -29,7 +40,6 @@ func suit_assign():
 			suit = "hearts_"
 		if card_res is weaponCard:
 			suit = "diamonds_"
-	
 
 
 func value_assign():

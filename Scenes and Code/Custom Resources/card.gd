@@ -12,9 +12,12 @@ func value_assign():
 
 func resolve(card : Card, player):
 	if card is monsterCard:
-		player.health -= card.value
+		if card.value - player.active_weapon.value >= 0:
+			player.health -= (card.value - player.active_weapon.value)
+		else:
+			pass
 	if card is weaponCard:
-		pass
+		player.active_weapon = card
 	if card is healthCard:
 		player.health += card.value
 

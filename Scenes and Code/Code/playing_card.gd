@@ -18,10 +18,7 @@ var value_flg = false
 var player_node
 
 func _process(delta: float) -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		card_res.resolve(card_res, player_node)
-		card_collected.emit(card_res, value)
-		print(player_node.health)
+	pass
 
 
 func card_assign() -> void:
@@ -60,3 +57,10 @@ func value_assign():
 		valuestr = ".png"
 	else:
 		valuestr = "0" + str(value) + ".png"
+
+
+func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+		card_res.resolve(card_res, player_node)
+		card_collected.emit(card_res, value)
+		print(player_node.health)

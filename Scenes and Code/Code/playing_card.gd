@@ -1,12 +1,14 @@
 extends Area2D
 
-signal card_collected(attribute, value)
+signal card_collected(card_to_delete, attribute, value)
 
 @export var card_res : Card
 @onready var sprite: Sprite2D = $Sprite
 
+#Define possible card types for if ever needing to hard call them
 var card_types := ["res://Resources/Cards/Health Potions/health_potion.tres", "res://Resources/Cards/Monsters/monster.tres", "res://Resources/Cards/Weapons/weapon.tres"]
 
+#Save the path prefix so the other parts can be added on
 var card_sprite_path_prefix := "res://Assets/kenney_playing-cards-pack/PNG/Cards (large)/card_"
 var value
 var suit
@@ -20,29 +22,31 @@ var player_node
 func _process(delta: float) -> void:
 	pass
 
-
+#function to assign a card a value
 func card_assign() -> void:
-	value_assign()
-	suit_assign()
+	value_assign() #call value_assign
+	suit_assign() #call suit_assign
 	
-	sprite.texture = load(card_sprite_path_prefix + suit + valuestr)
+	sprite.texture = load(card_sprite_path_prefix + suit + valuestr) #load the texture to the sprite of the created card
 
 func suit_assign():
-	if value == 0:
-		suit = "empty"
-	else:
-		if card_res is monsterCard:
-			suit = ["clubs_", "spades_"].pick_random()
-		if card_res is healthCard:
-			suit = "hearts_"
-		if card_res is weaponCard:
-			suit = "diamonds_"
+	if value == 0: #If the card has no value
+		suit = "empty" #call the empty card path
+	else: #but if it does have a value
+		if card_res is monsterCard: #if it is a monster
+			suit = ["clubs_", "spades_"].pick_random() #pick randomly from clubs or spades
+			#note this will be changed later
+		if card_res is healthCard: #If it is a health potion
+			suit = "hearts_" #call the hearts text to be added to the path
+		if card_res is weaponCard: #if it is a weapon
+			suit = "diamonds_" #call the suit to be diamonds
 
 
 func value_assign():
-	card_res.value_assign()
-	value = card_res.value
+	card_res.value_assign() #call the value assign function within the card resource
+	value = card_res.value #set value to the card resource's value
 	
+	#Following code handles odd text paths and royalty cards
 	if value == 10:
 		valuestr = "10.png"
 	elif value == 11:
@@ -55,12 +59,14 @@ func value_assign():
 		valuestr = "A.png"
 	elif value == 0:
 		valuestr = ".png"
-	else:
-		valuestr = "0" + str(value) + ".png"
+	else: #otherwise
+		valuestr = "0" + str(value) + ".png" #add a 0 and the value to the end
 
 
+#This handles the actual clicking on the card
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	#if a player clicks on a card with the left mouse button
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		card_res.resolve(card_res, player_node)
-		card_collected.emit(card_res, value)
-		print(player_node.health)
+		card_res.resolve(card_res, player_node) #call the resolve function from the card resource
+		card_collected.emit(self, card_res, value) #emit a signal showing a card was collected
+		print(player_node.health) #Print the players current health

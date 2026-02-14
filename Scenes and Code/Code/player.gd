@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export_group("Stats")
 @export var health := 20
@@ -12,7 +12,7 @@ extends Node2D
 
 var effect := ["NONE", "BURNT", "FROZEN", "POISON"]
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if health > 20:
 		health = 20
 	if health < 0:

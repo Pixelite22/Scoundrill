@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctbt3qi0r53w4"]
+
+[ext_resource type="PackedScene" uid="uid://cbkhjchnumeoh" path="res://Scenes and Code/Scenes/playing_card.tscn" id="1_iklt3"]
+
+[node name="Room" type="HBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.78
+anchor_bottom = 0.452
+offset_left = -1.0
+offset_right = 0.439941
+offset_bottom = 0.103973
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 223
+alignment = 1
+
+[node name="Playing Card" parent="." instance=ExtResource("1_iklt3")]
+layout_mode = 2
+
+[node name="Playing Card2" parent="." instance=ExtResource("1_iklt3")]
+layout_mode = 2
+
+[node name="Playing Card3" parent="." instance=ExtResource("1_iklt3")]
+layout_mode = 2
+
+[node name="Playing Card4" parent="." instance=ExtResource("1_iklt3")]
+layout_mode = 2

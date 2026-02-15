@@ -1,7 +1,6 @@
-[gd_scene load_steps=62 format=3 uid="uid://cqid46a8fsr7p"]
+[gd_scene load_steps=58 format=3 uid="uid://cqid46a8fsr7p"]
 
 [ext_resource type="Script" uid="uid://cy3tkg0tu7tb" path="res://Scenes and Code/Code/main.gd" id="1_h5p5m"]
-[ext_resource type="PackedScene" uid="uid://cbkhjchnumeoh" path="res://Scenes and Code/Scenes/playing_card.tscn" id="2_1cyi1"]
 [ext_resource type="Script" uid="uid://b2fa1vhttkcxq" path="res://Scenes and Code/Custom Resources/health_cards.gd" id="3_b3peg"]
 [ext_resource type="PackedScene" uid="uid://x8nteqm08pbp" path="res://Scenes and Code/Scenes/card_deck.tscn" id="4_btu8o"]
 [ext_resource type="PackedScene" uid="uid://dq2edbrua2rxn" path="res://Scenes and Code/Scenes/player.tscn" id="5_1cyi1"]
@@ -11,34 +10,7 @@
 [ext_resource type="Script" uid="uid://jm4giavyxob8" path="res://Scenes and Code/Custom Resources/deck.gd" id="8_5b4t4"]
 [ext_resource type="Script" uid="uid://c4xfkp2komqnk" path="res://Scenes and Code/Code/Discard_Pile.gd" id="10_aib00"]
 [ext_resource type="Resource" uid="uid://cqex2i2m01ygw" path="res://Resources/Cards/Decks/discard_pile.tres" id="11_5b4t4"]
-
-[sub_resource type="Resource" id="Resource_5b4t4"]
-resource_local_to_scene = true
-script = ExtResource("3_b3peg")
-effects = 0
-value = 2
-metadata/_custom_type_script = "uid://b2fa1vhttkcxq"
-
-[sub_resource type="Resource" id="Resource_ang15"]
-resource_local_to_scene = true
-script = ExtResource("3_b3peg")
-effects = 0
-value = 3
-metadata/_custom_type_script = "uid://b2fa1vhttkcxq"
-
-[sub_resource type="Resource" id="Resource_kinwj"]
-resource_local_to_scene = true
-script = ExtResource("3_b3peg")
-effects = 0
-value = 2
-metadata/_custom_type_script = "uid://b2fa1vhttkcxq"
-
-[sub_resource type="Resource" id="Resource_120uy"]
-resource_local_to_scene = true
-script = ExtResource("3_b3peg")
-effects = 0
-value = 2
-metadata/_custom_type_script = "uid://b2fa1vhttkcxq"
+[ext_resource type="PackedScene" uid="uid://ctbt3qi0r53w4" path="res://Scenes and Code/Scenes/room.tscn" id="11_ang15"]
 
 [sub_resource type="Resource" id="Resource_ph0kj"]
 resource_local_to_scene = true
@@ -320,21 +292,11 @@ metadata/_custom_type_script = "uid://dr6jb201x203x"
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h5p5m")
 
-[node name="Playing Card" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(145, 241)
-card_res = SubResource("Resource_5b4t4")
-
-[node name="Playing Card2" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(393, 244)
-card_res = SubResource("Resource_ang15")
-
-[node name="Playing Card3" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(679, 246)
-card_res = SubResource("Resource_kinwj")
-
-[node name="Playing Card4" parent="." instance=ExtResource("2_1cyi1")]
-position = Vector2(992, 234)
-card_res = SubResource("Resource_120uy")
+[node name="Room" parent="." instance=ExtResource("11_ang15")]
+offset_left = 127.0
+offset_top = 158.0
+offset_right = 1026.0
+offset_bottom = 451.0
 
 [node name="Deck" parent="." instance=ExtResource("4_btu8o")]
 position = Vector2(976, 529)
@@ -348,8 +310,4 @@ position = Vector2(605, 533)
 script = ExtResource("10_aib00")
 deck_res = ExtResource("11_5b4t4")
 
-[connection signal="card_collected" from="Playing Card" to="." method="_on_card_collected"]
-[connection signal="card_collected" from="Playing Card2" to="." method="_on_card_collected"]
-[connection signal="card_collected" from="Playing Card3" to="." method="_on_card_collected"]
-[connection signal="card_collected" from="Playing Card4" to="." method="_on_card_collected"]
-[connection signal="input_event" from="Playing Card4" to="." method="_on_input_event"]
+[connection signal="card_needs_to_be_added" from="Deck" to="." method="_on_deck_card_needs_to_be_added"]

@@ -2,10 +2,13 @@
 
 [ext_resource type="Script" uid="uid://l1gblejqsato" path="res://Scenes and Code/Code/player.gd" id="1_onyru"]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_onyru")
 
 [node name="Health" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 154.0
@@ -13,6 +16,7 @@ offset_bottom = 48.0
 text = "Health: "
 
 [node name="Weapon Power" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 32.0
 offset_right = 163.0
@@ -20,6 +24,7 @@ offset_bottom = 72.0
 text = "Weapon Power: "
 
 [node name="Highest Number" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 56.0
 offset_right = 394.0

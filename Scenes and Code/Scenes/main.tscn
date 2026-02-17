@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cqid46a8fsr7p"]
+[gd_scene load_steps=57 format=3 uid="uid://cqid46a8fsr7p"]
 
 [ext_resource type="Script" uid="uid://cy3tkg0tu7tb" path="res://Scenes and Code/Code/main.gd" id="1_h5p5m"]
 [ext_resource type="Script" uid="uid://b2fa1vhttkcxq" path="res://Scenes and Code/Custom Resources/health_cards.gd" id="3_b3peg"]
@@ -283,12 +283,6 @@ script = ExtResource("8_5b4t4")
 cards = Array[ExtResource("5_k3ln2")]([SubResource("Resource_ph0kj"), SubResource("Resource_n4trw"), SubResource("Resource_uo7e3"), SubResource("Resource_qlihw"), SubResource("Resource_j6j8q"), SubResource("Resource_tc2bo"), SubResource("Resource_qlm60"), SubResource("Resource_wd55f"), SubResource("Resource_ti1m6"), SubResource("Resource_sljfi"), SubResource("Resource_7682i"), SubResource("Resource_06yf8"), SubResource("Resource_5snr3"), SubResource("Resource_ttcun"), SubResource("Resource_criuh"), SubResource("Resource_uf7ya"), SubResource("Resource_ci6w6"), SubResource("Resource_5pywy"), SubResource("Resource_cghxj"), SubResource("Resource_2my2c"), SubResource("Resource_qt7iv"), SubResource("Resource_xehfk"), SubResource("Resource_velc4"), SubResource("Resource_6y0bl"), SubResource("Resource_evlhf"), SubResource("Resource_8safl"), SubResource("Resource_2smmk"), SubResource("Resource_lgpo4"), SubResource("Resource_nofy4"), SubResource("Resource_dsiyo"), SubResource("Resource_gdkgg"), SubResource("Resource_lfkcp"), SubResource("Resource_btyt6"), SubResource("Resource_65g21"), SubResource("Resource_l3xrx"), SubResource("Resource_ffn7l"), SubResource("Resource_uv7q1"), SubResource("Resource_phle1"), SubResource("Resource_87tps"), SubResource("Resource_v6vbr"), SubResource("Resource_vd7pn"), SubResource("Resource_w1vll"), SubResource("Resource_pgqqf"), SubResource("Resource_lg4xo")])
 metadata/_custom_type_script = "uid://jm4giavyxob8"
 
-[sub_resource type="Resource" id="Resource_hl227"]
-script = ExtResource("6_b3peg")
-effects = 0
-value = 0
-metadata/_custom_type_script = "uid://dr6jb201x203x"
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h5p5m")
 
@@ -303,7 +297,6 @@ position = Vector2(976, 529)
 deck_res = SubResource("Resource_3fj7e")
 
 [node name="Player" parent="." instance=ExtResource("5_1cyi1")]
-active_weapon = SubResource("Resource_hl227")
 
 [node name="Discard Pile" parent="." instance=ExtResource("4_btu8o")]
 position = Vector2(605, 533)

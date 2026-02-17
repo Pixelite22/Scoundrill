@@ -28,5 +28,5 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 56.0
 offset_right = 394.0
-offset_bottom = 96.0
+offset_bottom = 104.0
 text = "The Highest number your weapon can attack: "

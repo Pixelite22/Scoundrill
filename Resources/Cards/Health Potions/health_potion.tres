@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="healthCard" load_steps=2 format=3 uid="uid://df00nj7270y71"]
+[gd_resource type="Resource" script_class="healthCard" load_steps=2 format=3 uid="uid://6r60njsqgj37"]
 
 [ext_resource type="Script" uid="uid://b2fa1vhttkcxq" path="res://Scenes and Code/Custom Resources/health_cards.gd" id="1_olhrp"]
 

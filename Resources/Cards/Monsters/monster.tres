@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://boib2lytvlgaf" path="res://Scenes and Code/Custom Resources/monster_cards.gd" id="1_otuyd"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_otuyd")
 effects = 0
 value = 0

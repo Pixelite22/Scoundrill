@@ -17,17 +17,6 @@ func randomize_deck():
 
 func empty_room(card_arr : Array):
 	print("Empty_Room Reached")
-#	var i = 0
-	
-#	for space in card_arr:
-#		if not is_instance_valid(space):
-#			print("Invalid card at position ", i)
-			
-#			card_arr.remove_at(i)
-			
-#		i += 1
-	
-	print(card_arr.size())
 	
 	return (4-card_arr.size())
 

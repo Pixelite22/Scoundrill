@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cqid46a8fsr7p"]
+[gd_scene load_steps=59 format=3 uid="uid://cqid46a8fsr7p"]
 
 [ext_resource type="Script" uid="uid://cy3tkg0tu7tb" path="res://Scenes and Code/Code/main.gd" id="1_h5p5m"]
 [ext_resource type="Script" uid="uid://b2fa1vhttkcxq" path="res://Scenes and Code/Custom Resources/health_cards.gd" id="3_b3peg"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://c4xfkp2komqnk" path="res://Scenes and Code/Code/Discard_Pile.gd" id="10_aib00"]
 [ext_resource type="Resource" uid="uid://cqex2i2m01ygw" path="res://Resources/Cards/Decks/discard_pile.tres" id="11_5b4t4"]
 [ext_resource type="PackedScene" uid="uid://ctbt3qi0r53w4" path="res://Scenes and Code/Scenes/room.tscn" id="11_ang15"]
+[ext_resource type="PackedScene" uid="uid://n4faexp56lkf" path="res://Scenes and Code/Scenes/game_win_screen.tscn" id="12_ang15"]
+[ext_resource type="PackedScene" uid="uid://58lnnj23523u" path="res://Scenes and Code/Scenes/game_loss_screen.tscn" id="13_kinwj"]
 
 [sub_resource type="Resource" id="Resource_ph0kj"]
 resource_local_to_scene = true
@@ -302,5 +304,17 @@ deck_res = SubResource("Resource_3fj7e")
 position = Vector2(605, 533)
 script = ExtResource("10_aib00")
 deck_res = ExtResource("11_5b4t4")
+
+[node name="Game Win Screen" parent="." instance=ExtResource("12_ang15")]
+process_mode = 3
+visible = false
+offset_right = 1205.0
+offset_bottom = 700.0
+
+[node name="game_loss_screen" parent="." instance=ExtResource("13_kinwj")]
+process_mode = 3
+visible = false
+offset_right = 1150.0
+offset_bottom = 660.0
 
 [connection signal="card_needs_to_be_added" from="Deck" to="." method="_on_deck_card_needs_to_be_added"]

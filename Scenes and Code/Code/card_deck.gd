@@ -4,6 +4,7 @@ signal card_needs_to_be_added(needed_cards)
 
 @export var deck_res : Deck #Var to connect the deck resource to this code
 @onready var main: Node2D = $".."
+var game_over := false
 
 
 #ready function
@@ -32,11 +33,12 @@ func deal_room(room_cards):
 	
 	if needed_cards > 0:
 		card_needs_to_be_added.emit(needed_cards)
-		await main.cards_added
+		if deck_res.cards.size() > needed_cards:
+			await main.cards_added
 	
 	for playing_card in room_cards: #For a playing_card node within the room_card array
 		drawn_card = deck_res.draw() #set drawn_card to a card drawn used by the draw function in deck_res
-		print(drawn_card, " has a value of ", drawn_card.value)
+#		print(drawn_card, " has a value of ", drawn_card.value)
 		dealt_cards.append(drawn_card) #Append the card to the dealt cards array
 		if not is_instance_valid(playing_card):
 			continue

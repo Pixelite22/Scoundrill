@@ -73,7 +73,8 @@ func value_assign():
 
 func _gui_input(event: InputEvent) -> void:
 	#if a player clicks on a card with the left mouse button
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		card_res.resolve(card_res, player_node) #call the resolve function from the card resource
-		card_collected.emit(self, card_res, value) #emit a signal showing a card was collected
-		print(player_node.health) #Print the players current health
+	if self.name != "Weapon Card":
+		if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+			card_res.resolve(card_res, player_node) #call the resolve function from the card resource
+			card_collected.emit(self, card_res, value) #emit a signal showing a card was collected
+			print(player_node.health) #Print the players current health

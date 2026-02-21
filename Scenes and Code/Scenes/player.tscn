@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq2edbrua2rxn"]
+[gd_scene load_steps=3 format=3 uid="uid://dq2edbrua2rxn"]
 
 [ext_resource type="Script" uid="uid://l1gblejqsato" path="res://Scenes and Code/Code/player.gd" id="1_onyru"]
+[ext_resource type="PackedScene" uid="uid://cbkhjchnumeoh" path="res://Scenes and Code/Scenes/playing_card.tscn" id="2_li7k3"]
 
 [node name="Player" type="Control"]
 layout_mode = 3
@@ -10,23 +11,57 @@ script = ExtResource("1_onyru")
 [node name="Health" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 8.0
-offset_right = 154.0
-offset_bottom = 48.0
-text = "Health: "
+offset_top = 589.0
+offset_right = 1155.0
+offset_bottom = 629.0
+text = "Health Remaining: "
+
+[node name="Bar" type="ProgressBar" parent="Health"]
+modulate = Color(0.818536, 0, 0.131122, 1)
+layout_mode = 0
+offset_left = 150.0
+offset_right = 1134.0
+offset_bottom = 27.0
+max_value = 20.0
+show_percentage = false
+
+[node name="Value" type="RichTextLabel" parent="Health"]
+layout_mode = 0
+offset_left = 149.0
+offset_right = 1136.0
+offset_bottom = 40.0
+text = "placeholder"
+horizontal_alignment = 1
 
 [node name="Weapon Power" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 32.0
-offset_right = 163.0
-offset_bottom = 72.0
+offset_top = 486.0
+offset_right = 202.0
+offset_bottom = 574.0
 text = "Weapon Power: "
+vertical_alignment = 1
+
+[node name="Weapon Card" parent="Weapon Power" instance=ExtResource("2_li7k3")]
+layout_mode = 1
+offset_left = 152.0
+offset_top = 40.0
+offset_right = 150.248
+offset_bottom = 39.048
+scale = Vector2(0.25, 0.25)
 
 [node name="Highest Number" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 56.0
-offset_right = 394.0
+offset_right = 463.0
 offset_bottom = 104.0
 text = "The Highest number your weapon can attack: "
+
+[node name="Deck Remaining" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 248.0
+offset_bottom = 120.0
+text = "Cards left in deck:"

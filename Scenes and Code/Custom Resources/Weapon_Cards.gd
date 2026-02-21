@@ -5,4 +5,6 @@ var kill_cap : int = 15
 
 func resolve(card : Card, player):
 	player.active_weapon = card #Set the players active weapon to the weapon card
+	player.weapon_card.card_res = self
+	player.weapon_card.card_assign()
 	super.resolve(card, player)

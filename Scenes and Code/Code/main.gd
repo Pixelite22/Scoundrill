@@ -2,10 +2,14 @@ extends Node2D
 
 signal cards_added
 
+var game_over := false
+
 @onready var player: Control = $Player
 @onready var deck: Node2D = $Deck
 @onready var discard_pile: Node2D = $"Discard Pile"
 @onready var room: HBoxContainer = $Room
+@onready var game_win_screen: Control = $"Game Win Screen"
+@onready var game_loss_screen: Control = $game_loss_screen
 
 var card_ctr : int
 var room_cards : Array[Control] = []
@@ -20,13 +24,24 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("Run Away"): #If there is an input linked to Run Away pressed
-		deck.ran_away(active_cards) #Call the run away function on the deck
-		refresh_room() #Due to await in deck_card, need to put a buffer function here to prevent async
+	if player.health <= 0 or deck.deck_res.empty(): #(deck.deck_res.empty() and room_cards.size() == 0) 
+		deck.game_over = true
+		game_over = true
+		if deck.deck_res.empty():
+			game_win_screen.show()
+		else:
+			game_loss_screen.show()
+		get_tree().paused = true
+	else:
+		if Input.is_action_just_pressed("Run Away"): #If there is an input linked to Run Away pressed
+			deck.ran_away(active_cards) #Call the run away function on the deck
+			refresh_room() #Due to await in deck_card, need to put a buffer function here to prevent async
+		
+		if card_ctr <= 1 and not game_over:
+			while card_ctr < 4:
+				deck.deal_room(room_cards)
 	
-	if card_ctr <= 1:
-		while card_ctr < 4:
-			deck.deal_room(room_cards)
+	player.deck_info(deck.deck_res)
 
 func refresh_room():
 	active_cards = await deck.deal_room(room_cards) #Set the active cards to the room cards, which are dealt by the deck node function

@@ -12,7 +12,7 @@ var point_value : int = 0
 
 @onready var weapon_power_label: RichTextLabel = $"Weapon Power"
 @onready var container: HBoxContainer = $"Weapon Power/Container"
-@onready var weapon_card: Control = $"Weapon Power/Container/Weapon Card"
+#@onready var weapon_card: Control = $"Weapon Power/Container/Weapon Card"
 var weapmon_arr : Array[Control] = []
 
 @onready var highest_number_label: RichTextLabel = $"Highest Number"

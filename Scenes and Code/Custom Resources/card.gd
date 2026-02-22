@@ -12,7 +12,7 @@ func value_assign():
 	pass
 
 #function to resolve card effects and damage
-func resolve(card : Card, player):
+func resolve(card : Card, player, use_weapon : bool):
 	print("Base Resolved")
 
 #Function for applying the effect of a card, currently handled in individiual card resources

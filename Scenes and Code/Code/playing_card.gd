@@ -62,26 +62,27 @@ func value_assign():
 	else: #otherwise
 		valuestr = "0" + str(value) + ".png" #add a 0 and the value to the end
 
-
-#This handles the actual clicking on the card
-#func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-#	#if a player clicks on a card with the left mouse button
-#	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-#		card_res.resolve(card_res, player_node) #call the resolve function from the card resource
-#		card_collected.emit(self, card_res, value) #emit a signal showing a card was collected
-#		print(player_node.health) #Print the players current health
-
 func _gui_input(event: InputEvent) -> void:
-	#if a player clicks on a card with the left mouse button
+	#As long as the card isn't marked as a display card
 	if self.name != "Display Card":
-		if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-			if card_res is weaponCard or card_res is monsterCard:
-				if card_res is weaponCard:
-					player_node.clear_weapmons()
-				if card_res is weaponCard or (card_res is monsterCard and player_node.active_weapon and card_res.value <= player_node.active_weapon.kill_cap):
-					player_node.add_weapmon_card()
-				else:
+		#if a player clicks on a card
+		if event is InputEventMouseButton and event.is_pressed():
+		
+			#If it was a left click
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if card_res is weaponCard or card_res is monsterCard:
+					if card_res is weaponCard:
+						player_node.clear_weapmons()
+					if card_res is weaponCard or (card_res is monsterCard and player_node.active_weapon and card_res.value <= player_node.active_weapon.kill_cap):
+						player_node.add_weapmon_card()
+					else:
+						player_node.point_handling(card_res.value, 1)
+				card_res.resolve(card_res, player_node, true) #call the resolve function from the card resource
+		
+			#If it was a right click
+			if event.button_index == MOUSE_BUTTON_RIGHT:
+				if card_res is weaponCard or card_res is monsterCard:
 					player_node.point_handling(card_res.value, 1)
-			card_res.resolve(card_res, player_node) #call the resolve function from the card resource
+				card_res.resolve(card_res, player_node, false) #call the resolve function from the card resource
+			
 			card_collected.emit(self, card_res, value) #emit a signal showing a card was collected
-			print(player_node.health) #Print the players current health

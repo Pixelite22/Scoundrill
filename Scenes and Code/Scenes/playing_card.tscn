@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://ciokig3b7qjmq" path="res://Scenes and Code/Code/playing_card.gd" id="2_7np2i"]
 
 [node name="Playing Card" type="Control"]
+custom_minimum_size = Vector2(200, 300)
 layout_mode = 3
 anchor_right = 0.176
 anchor_bottom = 0.449
@@ -16,11 +17,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -59.0
-offset_top = -14.0
-offset_right = -196.0
-offset_bottom = -240.0
+offset_left = -64.0
+offset_top = -41.0
+offset_right = -199.0
+offset_bottom = -265.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(5, 5)
+mouse_filter = 2
 texture = ExtResource("1_7np2i")
+expand_mode = 1
+stretch_mode = 5

@@ -288,20 +288,64 @@ metadata/_custom_type_script = "uid://jm4giavyxob8"
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h5p5m")
 
-[node name="Room" parent="." instance=ExtResource("11_ang15")]
-offset_left = 127.0
-offset_top = 158.0
-offset_right = 1026.0
-offset_bottom = 451.0
+[node name="Table Design" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Deck" parent="." instance=ExtResource("4_btu8o")]
-position = Vector2(976, 529)
-deck_res = SubResource("Resource_3fj7e")
+[node name="Table Color" type="ColorRect" parent="Table Design"]
+offset_right = 1153.0
+offset_bottom = 649.0
+color = Color(0, 0.317647, 0.172549, 1)
+
+[node name="Long Side" type="ColorRect" parent="Table Design"]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 40.0
+color = Color(0.258824, 0.0509804, 0.0352941, 1)
+
+[node name="Long Side2" type="ColorRect" parent="Table Design"]
+layout_mode = 0
+offset_top = 607.0
+offset_right = 1151.0
+offset_bottom = 647.0
+color = Color(0.258824, 0.0509804, 0.0352941, 1)
+
+[node name="Short Side" type="ColorRect" parent="Table Design"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 643.0
+color = Color(0.258824, 0.0509804, 0.0352941, 1)
+
+[node name="Short Side2" type="ColorRect" parent="Table Design"]
+layout_mode = 0
+offset_left = 1112.0
+offset_top = 2.0
+offset_right = 1152.0
+offset_bottom = 643.0
+color = Color(0.258824, 0.0509804, 0.0352941, 1)
+
+[node name="Room" parent="." instance=ExtResource("11_ang15")]
+offset_left = 125.0
+offset_top = 155.0
+offset_right = 1024.0
+offset_bottom = 455.0
 
 [node name="Player" parent="." instance=ExtResource("5_1cyi1")]
+offset_left = 46.0
+offset_top = 39.0
+offset_right = 46.0
+offset_bottom = 39.0
+scale = Vector2(0.9, 0.9)
+
+[node name="Deck" parent="." instance=ExtResource("4_btu8o")]
+position = Vector2(81, 231)
+deck_res = SubResource("Resource_3fj7e")
 
 [node name="Discard Pile" parent="." instance=ExtResource("4_btu8o")]
-position = Vector2(605, 533)
+position = Vector2(81, 366)
 script = ExtResource("10_aib00")
 deck_res = ExtResource("11_5b4t4")
 

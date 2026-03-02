@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://n4faexp56lkf"]
+[gd_scene format=3 uid="uid://dgoxeil8eufbg"]
 
 [node name="Game Win Screen" type="Control"]
 layout_mode = 3

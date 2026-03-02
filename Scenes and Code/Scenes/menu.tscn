@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://cws52kva2l44d"]
+
+[ext_resource type="Script" uid="uid://kbfm88lyorst" path="res://Scenes and Code/Scenes/main_menu.gd" id="1_bqn24"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_bqn24")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1166.0
+offset_bottom = 663.0
+
+[node name="Title" type="RichTextLabel" parent="."]
+offset_left = 410.0
+offset_top = 99.0
+offset_right = 705.0
+offset_bottom = 172.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 45
+text = "SCOUNDREL"
+
+[node name="Start Button" type="Button" parent="."]
+offset_left = 454.0
+offset_top = 283.0
+offset_right = 638.0
+offset_bottom = 394.0
+theme_override_font_sizes/font_size = 75
+text = "Start"
+
+[node name="End Button" type="Button" parent="."]
+offset_left = 469.0
+offset_top = 457.0
+offset_right = 634.0
+offset_bottom = 568.0
+theme_override_font_sizes/font_size = 75
+text = "Quit"
+
+[connection signal="pressed" from="Start Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="End Button" to="." method="_on_end_button_pressed"]

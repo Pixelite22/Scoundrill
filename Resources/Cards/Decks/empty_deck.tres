@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Deck" load_steps=5 format=3 uid="uid://def0ly1brbxka"]
+
+[ext_resource type="Script" uid="uid://yxswxj656crp" path="res://Scenes and Code/Custom Resources/card.gd" id="1_cr6pq"]
+[ext_resource type="Script" uid="uid://boib2lytvlgaf" path="res://Scenes and Code/Custom Resources/monster_cards.gd" id="2_0srmp"]
+[ext_resource type="Script" uid="uid://jm4giavyxob8" path="res://Scenes and Code/Custom Resources/deck.gd" id="2_frhvg"]
+
+[sub_resource type="Resource" id="Resource_83o5v"]
+script = ExtResource("2_0srmp")
+effects = 0
+value = 0
+metadata/_custom_type_script = "uid://boib2lytvlgaf"
+
+[resource]
+script = ExtResource("2_frhvg")
+cards = Array[ExtResource("1_cr6pq")]([SubResource("Resource_83o5v")])
+metadata/_custom_type_script = "uid://jm4giavyxob8"

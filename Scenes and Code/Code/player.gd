@@ -24,11 +24,11 @@ const card_path = preload("res://Scenes and Code/Scenes/playing_card.tscn")
 
 var effect := ["NONE", "BURNT", "FROZEN", "POISON"]
 
-func _process(_delta: float) -> void:
-	handle_health()
-	handle_weapon()
+func _process(_delta: float) -> void: #every frame
+	handle_health() #make sure we are handling health
+	handle_weapon()#and weapons correctly
 	
-	points_label.text = "Points: " + str(point_value)
+	points_label.text = "Points: " + str(point_value) #make sure the points label is displaying correctly
 
 func handle_health():
 	if health > 20: #If health ever goes above 20
@@ -47,27 +47,26 @@ func handle_weapon():
 func add_weapmon_card():
 	print("Adding a weapmon")
 	var card_instance = card_path.instantiate() #set a var and instantiate a card from the card_path
-	card_instance.name = "Display Card"
+	card_instance.name = "Display Card" #Set the card to a display card so players cant click on it (logic for that elsewhere)
 	container.add_child(card_instance) #add the child to the room node
-	weapmon_arr.append(card_instance)
+	weapmon_arr.append(card_instance) #add the card to the weapmon array
 
 func clear_weapmons():
 	print("Clearing Weapmons")
-	var card_values = 0
-	var card_cnt = 0
-	for child in container.get_children():
-		if child.card_res is monsterCard:
+	var card_values = 0 #Create variables to store card values (for point and kill_cap logic)
+	var card_cnt = 0 #and card counts (for point logic)
+	for child in container.get_children(): #Loop through the cards in the container
+		if child.card_res is monsterCard: #if the card clicked on was a monster
 			card_values += child.card_res.value #Collect the points
 			card_cnt += 1 #collect the amount of cards in the stack to multiply points
 		child.queue_free() #remove card
 	
-	weapmon_arr.clear()
-	active_weapon = null
-	point_handling(card_values, card_cnt)
+	weapmon_arr.clear() #Clear the array
+	active_weapon = null #Set the active weapon to null
+	point_handling(card_values, card_cnt) #send the collected points and card count to point handling
 
 func point_handling(card_values, card_cnt):
-	point_value += (card_values * card_cnt)
-	
+	point_value += (card_values * card_cnt) #Increase the players point value by the product of the points collected, and the amount of cards it took to get that many points
 
 func deck_info(deck_resource):
-	deck_remaining.text = "Cards left in deck: " + str(deck_resource.cards.size())
+	deck_remaining.text = "Cards left in deck: " + str(deck_resource.cards.size()) #report the amount of cards left in the deck

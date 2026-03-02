@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://58lnnj23523u"]
+[gd_scene format=3 uid="uid://2trp78p82jyl"]
 
 [node name="game_loss_screen" type="Control"]
 layout_mode = 3

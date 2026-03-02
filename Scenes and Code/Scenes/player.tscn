@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq2edbrua2rxn"]
+[gd_scene load_steps=2 format=3 uid="uid://ccwxlqnpmwp5y"]
 
 [ext_resource type="Script" uid="uid://l1gblejqsato" path="res://Scenes and Code/Code/player.gd" id="1_onyru"]
 
@@ -35,9 +35,9 @@ horizontal_alignment = 1
 [node name="Weapon Power" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 486.0
+offset_top = 456.0
 offset_right = 1138.0
-offset_bottom = 574.0
+offset_bottom = 596.0
 text = "Weapon: "
 vertical_alignment = 1
 
@@ -47,14 +47,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 76.0
-offset_top = 2.0
-offset_right = 3166.0
-offset_bottom = 214.0
+offset_left = 108.0
+offset_top = 24.0
+offset_right = -600.0
+offset_bottom = -92.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.25, 0.25)
-theme_override_constants/separation = -115
+scale = Vector2(4, 4)
+theme_override_constants/separation = 7
 
 [node name="Highest Number" type="RichTextLabel" parent="."]
 layout_mode = 0

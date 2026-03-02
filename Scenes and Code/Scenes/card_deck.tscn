@@ -1,18 +1,58 @@
-[gd_scene load_steps=5 format=3 uid="uid://x8nteqm08pbp"]
+[gd_scene load_steps=5 format=3 uid="uid://cw8cd74620tpq"]
 
-[ext_resource type="Texture2D" uid="uid://d3gubhnikk4od" path="res://Assets/kenney_playing-cards-pack/PNG/Cards (large)/card_back.png" id="1_6bscr"]
+[ext_resource type="Texture2D" uid="uid://d3gubhnikk4od" path="res://Assets/Images/kenney_playing-cards-pack/PNG/Cards (large)/card_back.png" id="1_6bscr"]
 [ext_resource type="Script" uid="uid://c6pwoxvfnuxs7" path="res://Scenes and Code/Code/card_deck.gd" id="1_s6nyq"]
-[ext_resource type="Resource" uid="uid://cgasoeag40okv" path="res://Resources/Cards/Decks/Main Deck.tres" id="2_43ct6"]
+[ext_resource type="AudioStream" uid="uid://df6hw33306gb2" path="res://Assets/Sounds/Shuffle.mp3" id="4_43ct6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h75g5"]
 size = Vector2(40, 58)
 
 [node name="Deck" type="Node2D"]
 script = ExtResource("1_s6nyq")
-deck_res = ExtResource("2_43ct6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6bscr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h75g5")
+
+[node name="Sound Player" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_43ct6")
+
+[node name="Available Cards" type="BoxContainer" parent="."]
+offset_left = -8.0
+offset_top = 8.0
+offset_right = 2322.0
+offset_bottom = 308.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 13
+
+[node name="Available Cards2" type="BoxContainer" parent="."]
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 2322.0
+offset_bottom = 468.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 13
+
+[node name="Available Cards3" type="BoxContainer" parent="."]
+offset_left = -8.0
+offset_top = 328.0
+offset_right = 2322.0
+offset_bottom = 628.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 13
+
+[node name="Available Cards4" type="BoxContainer" parent="."]
+offset_left = -8.0
+offset_top = 480.0
+offset_right = 2322.0
+offset_bottom = 780.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/separation = 13
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1193.0
+offset_bottom = 672.0
+color = Color(0.00820202, 0.00820202, 0.00820202, 1)

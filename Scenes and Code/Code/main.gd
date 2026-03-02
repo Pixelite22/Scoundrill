@@ -2,7 +2,10 @@ extends Node2D
 
 signal cards_added
 
+var game_started := false
 var game_over := false
+var paused := false
+var can_run := true
 
 @onready var player: Control = $Player
 @onready var deck: Node2D = $Deck
@@ -16,32 +19,50 @@ var room_cards : Array[Control] = []
 var active_cards : Array[Card] = []
 var chosen_cards : Array[Control] = []
 
+var discard_pile_normal_pos = Vector2(81, 366)
+
 const card_path = preload("res://Scenes and Code/Scenes/playing_card.tscn")
 
 func _ready() -> void:
-	fill_room()
-	await refresh_room()
+	pass
 
 
 func _process(_delta: float) -> void:
-	if player.health <= 0 or deck.deck_res.empty(): #(deck.deck_res.empty() and room_cards.size() == 0) 
-		deck.game_over = true
-		game_over = true
-		if deck.deck_res.empty():
-			game_win_screen.show()
-		else:
-			game_loss_screen.show()
-		get_tree().paused = true
-	else:
-		if Input.is_action_just_pressed("Run Away"): #If there is an input linked to Run Away pressed
+	if Input.is_action_just_pressed("Pause"): #If the pause button is pressed
+		await get_tree().create_timer(0.5).timeout
+		if not paused: #if the pause flag is false
+			paused = true #set it to true
+			discard_pile.background.show() #show the menu background
+			discard_pile.position = Vector2(0,0) #Change the coordinates so it appears correctly
+			discard_pile.fill_menu() #fill the menu
+		elif paused: #However, if it isn't paused
+			paused = false #set the flag to false
+			discard_pile.background.hide() #hide the menu background
+			discard_pile.position = discard_pile_normal_pos #Change the position back to normal
+			discard_pile.empty_menu() #Empty the menu so it doesn't overload later
+	
+	#This if statement checks for game ending conditions
+	if player.health <= 0 or deck.deck_res.empty(): #If the player loses all health or the deck is empty NOTE: might need to add to the winstate to wait till the room is out of cards
+		deck.game_over = true #Set the game over flag on the deck
+		game_over = true #Set the game over flag on the main.
+		if deck.deck_res.empty(): #if the deck being empty caused this if statement to start
+			game_win_screen.show() #They won the game and get the game win screen
+		else: #Otherwise
+			game_loss_screen.show() #They lose
+		get_tree().paused = true #pause the game so they don't accidentally keep clicking cards under the screen
+	else: #As long as one of the two conditions to check for an ended game aren't true
+		if Input.is_action_just_pressed("Run Away") and can_run: #If there is an input linked to Run Away pressed
 			deck.ran_away(active_cards) #Call the run away function on the deck
 			refresh_room() #Due to await in deck_card, need to put a buffer function here to prevent async
+			can_run = false
 		
-		if card_ctr <= 1 and not game_over:
-			while card_ctr < 4:
-				deck.deal_room(room_cards)
+		if game_started:
+			if card_ctr <= 1 and not game_over: #if there is 1 or less cards in the room
+				while card_ctr < 4: #while card counter is less then 4
+					deck.deal_room(room_cards) #refill that room my guy... or girl... not sure who will read this
+				can_run = true
 	
-	player.deck_info(deck.deck_res)
+	player.deck_info(deck.deck_res) #update the (currently) debug menu
 
 func refresh_room():
 	active_cards = await deck.deal_room(room_cards) #Set the active cards to the room cards, which are dealt by the deck node function
@@ -99,3 +120,9 @@ func refresh_card_nodes(card_refreshed):
 	card_refreshed.card_res = deck.deck_res.draw() #sets the card resource to the next card in the deck
 	card_refreshed.card_assign() #call the card assign function to actually let the card assign itself
 	card_ctr += 1
+
+
+func _on_menu_start_button_pressed() -> void:
+	game_started = true
+	fill_room()
+	await refresh_room()

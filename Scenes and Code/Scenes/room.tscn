@@ -4,16 +4,16 @@
 
 [node name="Room" type="HBoxContainer"]
 anchors_preset = -1
-anchor_right = 0.651
-anchor_bottom = 0.386
-offset_right = -674.952
-offset_bottom = -250.128
+anchor_right = 0.166
+anchor_bottom = 0.093
+offset_right = -0.23201
+offset_bottom = -0.264
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(10, 10)
-size_flags_horizontal = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/separation = 19
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="Playing Card" parent="." instance=ExtResource("1_iklt3")]

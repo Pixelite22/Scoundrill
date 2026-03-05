@@ -10,9 +10,11 @@ var can_run := true
 @onready var player: Control = $Player
 @onready var deck: Node2D = $Deck
 @onready var discard_pile: Node2D = $"Discard Pile"
-@onready var room: HBoxContainer = $Room
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var room: HBoxContainer = $CanvasLayer/Room
 @onready var game_win_screen: Control = $"Game Win Screen"
 @onready var game_loss_screen: Control = $game_loss_screen
+@onready var menu: Node2D = $Menu
 
 var card_ctr : int
 var room_cards : Array[Control] = []
@@ -45,6 +47,7 @@ func _process(_delta: float) -> void:
 	if player.health <= 0 or deck.deck_res.empty(): #If the player loses all health or the deck is empty NOTE: might need to add to the winstate to wait till the room is out of cards
 		deck.game_over = true #Set the game over flag on the deck
 		game_over = true #Set the game over flag on the main.
+		canvas_layer.hide()
 		if deck.deck_res.empty(): #if the deck being empty caused this if statement to start
 			game_win_screen.show() #They won the game and get the game win screen
 		else: #Otherwise
@@ -123,6 +126,7 @@ func refresh_card_nodes(card_refreshed):
 
 
 func _on_menu_start_button_pressed() -> void:
-	game_started = true
-	fill_room()
-	await refresh_room()
+	canvas_layer.show()
+	game_started = true #Set the game start flag to true
+	fill_room() #Fill the room with function
+	await refresh_room() #await the room refresh

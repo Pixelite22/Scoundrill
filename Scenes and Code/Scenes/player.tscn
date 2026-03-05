@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccwxlqnpmwp5y"]
+[gd_scene load_steps=3 format=3 uid="uid://ccwxlqnpmwp5y"]
 
 [ext_resource type="Script" uid="uid://l1gblejqsato" path="res://Scenes and Code/Code/player.gd" id="1_onyru"]
+[ext_resource type="PackedScene" uid="uid://cnsl57t11ap2j" path="res://Scenes and Code/Scenes/playing_card.tscn" id="2_li7k3"]
 
 [node name="Player" type="Control"]
 layout_mode = 3
@@ -47,14 +48,26 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 108.0
-offset_top = 24.0
-offset_right = -600.0
-offset_bottom = -92.0
+offset_left = 75.0
+offset_top = 26.0
+offset_right = -633.0
+offset_bottom = -55.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4, 4)
-theme_override_constants/separation = 7
+scale = Vector2(1.5, 1.5)
+theme_override_constants/separation = 18
+
+[node name="Playing Card" parent="Weapon Power/Container" instance=ExtResource("2_li7k3")]
+layout_mode = 2
+
+[node name="Playing Card2" parent="Weapon Power/Container" instance=ExtResource("2_li7k3")]
+layout_mode = 2
+
+[node name="Playing Card3" parent="Weapon Power/Container" instance=ExtResource("2_li7k3")]
+layout_mode = 2
+
+[node name="Playing Card4" parent="Weapon Power/Container" instance=ExtResource("2_li7k3")]
+layout_mode = 2
 
 [node name="Highest Number" type="RichTextLabel" parent="."]
 layout_mode = 0

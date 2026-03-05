@@ -1,33 +1,25 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnsl57t11ap2j"]
 
-[ext_resource type="Texture2D" uid="uid://dywor8muoyp86" path="res://Assets/Images/kenney_playing-cards-pack/PNG/Cards (large)/card_empty.png" id="1_7np2i"]
+[ext_resource type="Texture2D" uid="uid://cae8drg1yxnnw" path="res://Assets/Images/kenney_playing-cards-pack/PNG/Cards (large)/card_empty.png" id="1_7np2i"]
 [ext_resource type="Script" uid="uid://ciokig3b7qjmq" path="res://Scenes and Code/Code/playing_card.gd" id="2_7np2i"]
 [ext_resource type="AudioStream" uid="uid://b8kp2f64ukfco" path="res://Assets/Sounds/freesound_community-flipcard-91468.wav" id="3_fbanc"]
 
 [node name="Playing Card" type="Control"]
 layout_mode = 3
-anchor_right = 0.176
-anchor_bottom = 0.449
-offset_right = -162.752
-offset_bottom = -229.952
-scale = Vector2(5, 5)
+anchor_right = 0.128
+anchor_bottom = 0.325
+offset_left = -27.0
+offset_top = -34.0
+offset_right = 25.544
+offset_bottom = 35.4
 script = ExtResource("2_7np2i")
-
-[node name="Sprite" type="TextureRect" parent="."]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -11.8
-offset_top = -16.0
-offset_right = 12.2
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_7np2i")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Audio Player" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_fbanc")
+
+[node name="Sprite" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(43, 60)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_7np2i")

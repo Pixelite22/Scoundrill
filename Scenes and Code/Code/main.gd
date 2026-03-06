@@ -26,7 +26,8 @@ var discard_pile_normal_pos = Vector2(81, 366)
 const card_path = preload("res://Scenes and Code/Scenes/playing_card.tscn")
 
 func _ready() -> void:
-	pass
+	$"Game Win Screen/Retry Button".pressed.connect(fill_deck)
+	$"game_loss_screen/Retry Button".pressed.connect(fill_deck)
 
 
 func _process(_delta: float) -> void:
@@ -49,8 +50,10 @@ func _process(_delta: float) -> void:
 		game_over = true #Set the game over flag on the main.
 		canvas_layer.hide()
 		if deck.deck_res.empty(): #if the deck being empty caused this if statement to start
+			$"game_win_screen/Point Label".text = "Points: " + str(player.point_value)
 			game_win_screen.show() #They won the game and get the game win screen
 		else: #Otherwise
+			$"game_loss_screen/Point Label".text = "Points: " + str(player.point_value)
 			game_loss_screen.show() #They lose
 		get_tree().paused = true #pause the game so they don't accidentally keep clicking cards under the screen
 	else: #As long as one of the two conditions to check for an ended game aren't true
@@ -76,6 +79,12 @@ func discard(card_type):
 	#print("Discard Pile now includes: ")
 	for card in discard_pile.deck_res.cards: 
 		print(card)
+
+func fill_deck():
+	for card in discard_pile.deck_res.cards:
+		deck.deck_res.add_card(card)
+	deck.deck_res.shuffle()
+	_on_menu_start_button_pressed()
 
 #called when a card is collected
 func _on_card_collected(card_to_delete: Control, attribute: Variant, value: Variant) -> void:
@@ -127,6 +136,10 @@ func refresh_card_nodes(card_refreshed):
 
 func _on_menu_start_button_pressed() -> void:
 	canvas_layer.show()
+	if game_loss_screen.is_visible_in_tree():
+		game_loss_screen.hide()
+	if game_win_screen.is_visible_in_tree():
+		game_win_screen.hide()
 	game_started = true #Set the game start flag to true
 	fill_room() #Fill the room with function
 	await refresh_room() #await the room refresh

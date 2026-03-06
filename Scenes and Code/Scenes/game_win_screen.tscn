@@ -25,3 +25,20 @@ offset_right = 821.0
 offset_bottom = 319.0
 theme_override_font_sizes/font_size = 99
 text = "YOU WON!!!"
+
+[node name="Point Label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 350.0
+offset_right = 843.0
+offset_bottom = 390.0
+text = "Points:  "
+
+[node name="Retry Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 406.0
+offset_right = 614.0
+offset_bottom = 497.0
+theme_override_font_sizes/font_size = 60
+text = "Retry?"

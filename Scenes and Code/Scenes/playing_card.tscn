@@ -10,8 +10,8 @@ anchor_right = 0.128
 anchor_bottom = 0.325
 offset_left = -27.0
 offset_top = -34.0
-offset_right = 25.544
-offset_bottom = 35.4
+offset_right = -129.456
+offset_bottom = -183.6
 script = ExtResource("2_7np2i")
 
 [node name="Audio Player" type="AudioStreamPlayer" parent="."]

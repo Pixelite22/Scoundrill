@@ -1,4 +1,5 @@
 extends Control
+class_name Card_Node
 
 signal card_collected(card_to_delete, attribute, value)
 
@@ -14,6 +15,8 @@ var card_sprite_path_prefix := "res://Assets/Images/kenney_playing-cards-pack/PN
 var value
 var suit
 var valuestr
+
+var cards_being_dealt : bool = false
 
 var suit_flg = false
 var value_flg = false
@@ -77,27 +80,28 @@ func play_click(): #NOTE: Not currently working as intended
 func _gui_input(event: InputEvent) -> void:
 	#As long as the card isn't marked as a display card
 	if self.name != "Display Card":
-		#if a player clicks on a card
-		if event is InputEventMouseButton and event.is_pressed():
-			#If it was a left click
-			if event.button_index == MOUSE_BUTTON_LEFT:
-				play_click() #Play the click noise (not fully working yet)
-				if card_res is weaponCard or card_res is monsterCard: #If the card_res is a monster or weapon
-					if card_res is weaponCard: #if it is a monster
-						player_node.clear_weapmons() #clear the weapon and monster array
-						#if it is a weapon or it is a monster who is weaker then the active weapons max kill_ctr
-					if card_res is weaponCard or (card_res is monsterCard and player_node.active_weapon and card_res.value <= player_node.active_weapon.kill_cap):
-						player_node.add_weapmon_card() #add it to the top of the array and the top of the weapon stack
-					else: #If it didn't fit the previous if, 
-						player_node.point_handling(card_res.value, 1) #just do point calculation
-						#note, we don't do elif for the first branch so it can go into point handling after
-				card_res.resolve(card_res, player_node, true) #call the resolve function from the card resource
-		
-			#If it was a right click
-			if event.button_index == MOUSE_BUTTON_RIGHT:
-				play_click() #play sound effect
-				if card_res is weaponCard or card_res is monsterCard: #If they clicked on a non health potion
-					player_node.point_handling(card_res.value, 1) #go into point handling
-				card_res.resolve(card_res, player_node, false) #call the resolve function from the card resource
+		if not cards_being_dealt:
+			#if a player clicks on a card
+			if event is InputEventMouseButton and event.is_pressed():
+				#If it was a left click
+				if event.button_index == MOUSE_BUTTON_LEFT:
+					play_click() #Play the click noise (not fully working yet)
+					if card_res is weaponCard or card_res is monsterCard: #If the card_res is a monster or weapon
+						if card_res is weaponCard: #if it is a monster
+							player_node.clear_weapmons() #clear the weapon and monster array
+							#if it is a weapon or it is a monster who is weaker then the active weapons max kill_ctr
+						if card_res is weaponCard or (card_res is monsterCard and player_node.active_weapon and card_res.value <= player_node.active_weapon.kill_cap):
+							player_node.add_weapmon_card() #add it to the top of the array and the top of the weapon stack
+						else: #If it didn't fit the previous if, 
+							player_node.point_handling(card_res.value, 1) #just do point calculation
+							#note, we don't do elif for the first branch so it can go into point handling after
+					card_res.resolve(card_res, player_node, true) #call the resolve function from the card resource
 			
-			card_collected.emit(self, card_res, value) #emit a signal showing a card was collected
+				#If it was a right click
+				if event.button_index == MOUSE_BUTTON_RIGHT:
+					play_click() #play sound effect
+					if card_res is weaponCard or card_res is monsterCard: #If they clicked on a non health potion
+						player_node.point_handling(card_res.value, 1) #go into point handling
+					card_res.resolve(card_res, player_node, false) #call the resolve function from the card resource
+				
+				card_collected.emit(self, card_res, value) #emit a signal showing a card was collected

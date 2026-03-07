@@ -6,12 +6,14 @@ var game_started := false
 var game_over := false
 var paused := false
 var can_run := true
+var is_dealing := false
 
 @onready var player: Control = $Player
 @onready var deck: Node2D = $Deck
 @onready var discard_pile: Node2D = $"Discard Pile"
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var room: HBoxContainer = $CanvasLayer/Room
+@onready var card_spawn: Marker2D = $"CanvasLayer/Card Spawn"
 @onready var game_win_screen: Control = $"Game Win Screen"
 @onready var game_loss_screen: Control = $game_loss_screen
 @onready var menu: Node2D = $Menu
@@ -59,19 +61,22 @@ func _process(_delta: float) -> void:
 	else: #As long as one of the two conditions to check for an ended game aren't true
 		if Input.is_action_just_pressed("Run Away") and can_run: #If there is an input linked to Run Away pressed
 			deck.ran_away(active_cards) #Call the run away function on the deck
-			refresh_room() #Due to await in deck_card, need to put a buffer function here to prevent async
+			refresh_room(true) #Due to await in deck_card, need to put a buffer function here to prevent async
 			can_run = false
 		
-		if game_started:
-			if card_ctr <= 1 and not game_over: #if there is 1 or less cards in the room
-				while card_ctr < 4: #while card counter is less then 4
-					deck.deal_room(room_cards) #refill that room my guy... or girl... not sure who will read this
-				can_run = true
+		
+	if game_started:
+		if card_ctr <= 1 and not game_over and not is_dealing:
+			is_dealing = true
+			await refresh_room(false)
+			can_run = true
+			is_dealing = false
+	
 	
 	player.deck_info(deck.deck_res) #update the (currently) debug menu
 
-func refresh_room():
-	active_cards = await deck.deal_room(room_cards) #Set the active cards to the room cards, which are dealt by the deck node function
+func refresh_room(ran_away):
+	active_cards = await deck.deal_room(room_cards, ran_away) #Set the active cards to the room cards, which are dealt by the deck node function
 
 #function to resolve card affects
 func discard(card_type): 
@@ -107,10 +112,27 @@ func _on_card_collected(card_to_delete: Control, attribute: Variant, value: Vari
 func _on_deck_card_needs_to_be_added(needed_cards: Variant) -> void:
 	for new in range(needed_cards): #loop through the range of needed cards
 		var card_instance = card_path.instantiate() #set a var and instantiate a card from the card_path
-		room.add_child(card_instance) #add the child to the room node
+		card_instance.position = card_spawn.position
+		canvas_layer.add_child(card_instance) #add the child to the canvas_layer node
+		await animate_card(card_instance)
 		connect_cards(card_instance) #call the connect function to connect the signal and assure it is placed in the correct arrays
+		card_instance.reparent(room) 
+	cards_added.emit()
 	print("Room_Cards size is: ", room_cards.size())
 	print("These cards are: ", room_cards)
+
+func animate_card(card: Card_Node):
+	card.modulate.a = 0
+	card.scale.x = -1
+	card.sprite.texture = load("res://Assets/Images/kenney_playing-cards-pack/PNG/Cards (large)/card_back.png")
+	
+	var tween = create_tween()
+	tween.tween_property(card, "modulate:a", 1.0, 1.0) #make card appear
+	tween.tween_property(card, "global_position",room.global_position, 0.5) #move from deck position to room position
+	tween.tween_property(card, "scale", Vector2(0.0, 1.0), 0.25) #Flip card from back
+	#card.card_assign() #will be called when getting the resource from the deck res to this one
+	tween.tween_property(card, "scale", Vector2(1.0, 1.0), 0.25) #to front
+	await tween.finished
 
 #fill the room function
 func fill_room():
@@ -142,4 +164,4 @@ func _on_menu_start_button_pressed() -> void:
 		game_win_screen.hide()
 	game_started = true #Set the game start flag to true
 	fill_room() #Fill the room with function
-	await refresh_room() #await the room refresh
+	await refresh_room(false) #await the room refresh

@@ -52,7 +52,7 @@ func _process(_delta: float) -> void:
 		game_over = true #Set the game over flag on the main.
 		canvas_layer.hide()
 		if deck.deck_res.empty(): #if the deck being empty caused this if statement to start
-			$"game_win_screen/Point Label".text = "Points: " + str(player.point_value)
+			$"Game Win Screen/Point Label".text = "Points: " + str(player.point_value)
 			game_win_screen.show() #They won the game and get the game win screen
 		else: #Otherwise
 			$"game_loss_screen/Point Label".text = "Points: " + str(player.point_value)
@@ -114,8 +114,8 @@ func _on_deck_card_needs_to_be_added(needed_cards: Variant) -> void:
 		var card_instance = card_path.instantiate() #set a var and instantiate a card from the card_path
 		card_instance.position = card_spawn.position
 		canvas_layer.add_child(card_instance) #add the child to the canvas_layer node
-		await animate_card(card_instance)
 		connect_cards(card_instance) #call the connect function to connect the signal and assure it is placed in the correct arrays
+		await animate_card(card_instance)
 		card_instance.reparent(room) 
 	cards_added.emit()
 	print("Room_Cards size is: ", room_cards.size())
@@ -130,9 +130,13 @@ func animate_card(card: Card_Node):
 	tween.tween_property(card, "modulate:a", 1.0, 1.0) #make card appear
 	tween.tween_property(card, "global_position",room.global_position, 0.5) #move from deck position to room position
 	tween.tween_property(card, "scale", Vector2(0.0, 1.0), 0.25) #Flip card from back
-	#card.card_assign() #will be called when getting the resource from the deck res to this one
-	tween.tween_property(card, "scale", Vector2(1.0, 1.0), 0.25) #to front
 	await tween.finished
+	
+	card.card_assign() #will be called when getting the resource from the deck res to this one
+	
+	var tween2 = create_tween()
+	tween2.tween_property(card, "scale", Vector2(1.0, 1.0), 0.25) #to front
+	await tween2.finished
 
 #fill the room function
 func fill_room():
@@ -152,7 +156,8 @@ func connect_cards(card):
 #Function to refresh card nodes
 func refresh_card_nodes(card_refreshed):
 	card_refreshed.card_res = deck.deck_res.draw() #sets the card resource to the next card in the deck
-	card_refreshed.card_assign() #call the card assign function to actually let the card assign itself
+	if card_refreshed.get_parent() is HBoxContainer:
+		card_refreshed.card_assign() #call the card assign function to actually let the card assign itself
 	card_ctr += 1
 
 

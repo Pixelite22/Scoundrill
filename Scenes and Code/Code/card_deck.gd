@@ -21,8 +21,12 @@ func randomize_deck():
 
 func empty_room(card_arr : Array):
 	print("Empty_Room Reached")
-	
-	return (4-card_arr.size()) #Return 4 minus the amount of cards currently
+	if deck_res.cards.size() >= 4:
+		return (4-card_arr.size()) #Return 4 minus the amount of cards currently
+	elif deck_res.cards.size() > 0:
+		return (deck_res.cards.size())
+	else:
+		return 0
 
 
 #Function to deal a room worth of cards
